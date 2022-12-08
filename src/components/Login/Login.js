@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
-
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useContext,
+  useRef,
+} from "react";
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 import AuthContext from "../../store/auth-context";
+import Input from "../UI/Input/Input";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
@@ -30,6 +36,8 @@ const passReducer = (state, action) => {
 };
 
 const Login = (props) => {
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
   const authCtx = useContext(AuthContext);
   // const [enteredEmail, setEnteredEmail] = useState("");
   // const [emailIsValid, setEmailIsValid] = useState();
@@ -101,7 +109,8 @@ const Login = (props) => {
           }`}
         >
           <label htmlFor="email">E-Mail</label>
-          <input
+          <Input
+            ref={emailInputRef}
             type="email"
             id="email"
             value={emailState.value}
@@ -115,7 +124,8 @@ const Login = (props) => {
           }`}
         >
           <label htmlFor="password">Password</label>
-          <input
+          <Input
+            ref={passwordInputRef}
             type="password"
             id="password"
             value={passwordState.value}
